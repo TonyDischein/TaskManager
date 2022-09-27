@@ -24,12 +24,4 @@ class Web::SessionsController < Web::ApplicationController
   def session_params
     params.require(:session_form).permit(:email, :password)
   end
-
-  def sign_in(user)
-    session[:user_id] = user.id
-  end
-
-  def sign_out
-    session[:user_id] = nil
-  end
 end
