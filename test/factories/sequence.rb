@@ -16,6 +16,4 @@ FactoryBot.define do
   sequence :expired_at do |_n|
     time.strftime('%Y-%m-%d')
   end
-
-  sequence(:state) { 'new_task' }
 end

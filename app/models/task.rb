@@ -5,18 +5,13 @@ class Task < ApplicationRecord
   validates :name, :description, :author, presence: true
   validates :description, length: { maximum: 500 }
 
-  def self.predevelop_states
-    [:new_task, :in_qa, :in_code_review]
-  end
-
   state_machine initial: :new_task do
     event :begin_develop do
-      transition Task.predevelop_states => :in_development
+      transition [:new_task, :in_qa, :in_code_review] => :in_development
     end
 
     event :archive do
-      transition new_task: :archived
-      transition released: :archived
+      transition [:new_task, :released] => :archived
     end
 
     event :begin_test do
