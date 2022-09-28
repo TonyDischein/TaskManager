@@ -1,5 +1,5 @@
-= simple_form_for @user, as: :user, url: admin_users_path do |f|
-  h4 = title if defined?(title) && title
+= simple_form_for @user, as: :user, url: func do |f|
+  h4 = title
 
   p
     = f.input :first_name
