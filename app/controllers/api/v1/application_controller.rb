@@ -1,6 +1,8 @@
 class Api::V1::ApplicationController < Api::ApplicationController
+  include AuthHelper
   RANSACK_DEFAULT_SORT = 'id ASC'.freeze
   respond_to :json
+  helper_method :current_user
 
   def build_meta(collection)
     {
