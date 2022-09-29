@@ -5,5 +5,6 @@ FactoryBot.define do
     association :author, factory: [:manager]
     association :assignee, factory: [:developer]
     state { 'new_task' }
+    expired_at
   end
 end
