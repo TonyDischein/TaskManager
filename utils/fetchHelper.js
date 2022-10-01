@@ -39,6 +39,7 @@ export default {
   get(url, params = {}) {
     return axios
       .get(url, {
+        headers: { Accept: 'application/json' },
         params: decamelize(params),
         paramsSerializer: (parameters) => qs.stringify(parameters, { encode: false }),
       })
