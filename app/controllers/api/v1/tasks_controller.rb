@@ -1,6 +1,6 @@
 class Api::V1::TasksController < Api::V1::ApplicationController
   def index
-    tasks = Task.all.
+    tasks = Task.order(id: :desc).
       ransack(ransack_params).
       result.
       page(page).
@@ -26,7 +26,7 @@ class Api::V1::TasksController < Api::V1::ApplicationController
     task = Task.find(params[:id])
     task.update(task_params)
 
-    respond_with(task, serializer: TaskSerializer)
+    render(json: task)
   end
 
   def destroy

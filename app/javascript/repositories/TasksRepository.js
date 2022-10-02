@@ -20,7 +20,15 @@ export default {
     return FetchHelper.put(path, { task });
   },
 
-  create(task = {}) {},
+  create(task = {}) {
+    const path = routes.apiV1TasksPath(task);
 
-  destroy(id) {},
+    return FetchHelper.post(path, task);
+  },
+
+  destroy(id) {
+    const path = routes.apiV1TaskPath(id);
+
+    return FetchHelper.delete(path, id);
+  },
 };
