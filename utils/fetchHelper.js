@@ -17,7 +17,6 @@ function headers() {
   };
 }
 
-axios.defaults.headers.get['Accept'] = 'application/json';
 axios.defaults.headers.post = headers();
 axios.defaults.headers.put = headers();
 axios.defaults.headers.delete = headers();

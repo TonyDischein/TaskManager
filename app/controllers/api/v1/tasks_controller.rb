@@ -26,7 +26,7 @@ class Api::V1::TasksController < Api::V1::ApplicationController
     task = Task.find(params[:id])
     task.update(task_params)
 
-    render(json: task)
+    respond_with(task, serializer: TaskSerializer)
   end
 
   def destroy

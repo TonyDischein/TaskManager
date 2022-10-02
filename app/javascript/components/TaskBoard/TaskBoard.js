@@ -3,11 +3,11 @@ import { propOr } from 'ramda';
 
 import Task from 'components/Task';
 import TasksRepository from 'repositories/TasksRepository';
-import ColumnHeader from '../ColumnHeader';
+import ColumnHeader from 'components/ColumnHeader';
 import useStyles from './useStyles';
-import TaskForm from '../../forms/TaskForm';
-import AddPopup from '../AddPopup';
-import EditPopup from '../EditPopup';
+import TaskForm from 'forms/TaskForm';
+import AddPopup from 'components/AddPopup';
+import EditPopup from 'components/EditPopup';
 
 import KanbanBoard from '@lourenci/react-kanban';
 import '@lourenci/react-kanban/dist/styles.css';
