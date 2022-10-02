@@ -13,7 +13,6 @@ import Modal from '@material-ui/core/Modal';
 import TextField from '@material-ui/core/TextField';
 
 import TaskForm from 'forms/TaskForm';
-
 import useStyles from './useStyles';
 
 function AddPopup({ onClose, onCreateCard }) {

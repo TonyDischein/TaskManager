@@ -7,8 +7,6 @@ import SystemUpdateAltIcon from '@material-ui/icons/SystemUpdateAlt';
 import useStyles from './useStyles';
 
 function ColumnHeader({ column, onLoadMore }) {
-  const styles = useStyles();
-
   const {
     id,
     title,
@@ -17,7 +15,7 @@ function ColumnHeader({ column, onLoadMore }) {
   } = column;
 
   const count = cards.length;
-
+  const styles = useStyles();
   const handleLoadMore = () => onLoadMore(id, currentPage + 1);
 
   return (
