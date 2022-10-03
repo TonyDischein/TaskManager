@@ -14,16 +14,16 @@ export default {
     return FetchHelper.get(path);
   },
 
-  update(task = {}) {
-    const path = routes.apiV1TaskPath(task);
+  update(id, task = {}) {
+    const path = routes.apiV1TaskPath(id);
 
-    return FetchHelper.put(path, task);
+    return FetchHelper.put(path, { task });
   },
 
   create(task = {}) {
     const path = routes.apiV1TasksPath();
 
-    return FetchHelper.post(path, task);
+    return FetchHelper.post(path, { task });
   },
 
   destroy(id) {

@@ -130,7 +130,7 @@ function TaskBoard() {
   const handleTaskUpdate = (task) => {
     const attributes = TaskForm.attributesToSubmit(task);
 
-    return TasksRepository.update(attributes).then(() => {
+    return TasksRepository.update(task.id, attributes).then(() => {
       loadColumnInitial(task.state);
       handleClose();
     });
