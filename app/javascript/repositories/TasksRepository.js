@@ -14,10 +14,10 @@ export default {
     return FetchHelper.get(path);
   },
 
-  update(id, task = {}) {
-    const path = routes.apiV1TaskPath(id, task);
+  update(task = {}) {
+    const path = routes.apiV1TaskPath(task);
 
-    return FetchHelper.put(path, { task });
+    return FetchHelper.put(path, task);
   },
 
   create(task = {}) {
