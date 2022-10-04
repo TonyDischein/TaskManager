@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import PropTypesPresenter from '/utils/PropTypesPresenter';
+import PropTypesPresenter from 'utils/PropTypesPresenter';
 
 export default new PropTypesPresenter({
   id: PropTypes.number,
@@ -8,4 +8,5 @@ export default new PropTypesPresenter({
   state: PropTypes.string,
   assignee: PropTypes.object,
   author: PropTypes.object,
+  transitions: PropTypes.array,
 });
