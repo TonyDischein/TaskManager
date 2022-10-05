@@ -1,10 +1,11 @@
 import React from 'react';
+import { Provider } from 'react-redux';
 
 import store from 'store';
-import { Provider } from 'react-redux';
 import TaskBoard from 'containers/TaskBoard';
-import { MuiThemeProvider } from '@material-ui/core';
 import MUITheme from 'MUITheme/MUITheme';
+
+import { MuiThemeProvider } from '@material-ui/core';
 
 function App() {
   return (
