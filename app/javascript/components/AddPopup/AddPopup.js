@@ -12,13 +12,17 @@ import IconButton from '@material-ui/core/IconButton';
 import Modal from '@material-ui/core/Modal';
 import TextField from '@material-ui/core/TextField';
 
-import TaskForm from 'forms/TaskForm';
 import useStyles from './useStyles';
+import TaskForm from 'forms/TaskForm';
+import UserSelect from 'components/UserSelect/UserSelect';
+import TaskPresenter from 'presenters/TaskPresenter';
 
 function AddPopup({ onClose, onCreateCard }) {
   const [task, changeTask] = useState(TaskForm.defaultAttributes());
   const [isSaving, setSaving] = useState(false);
   const [errors, setErrors] = useState({});
+  const styles = useStyles();
+
   const handleCreate = () => {
     setSaving(true);
 
@@ -31,8 +35,9 @@ function AddPopup({ onClose, onCreateCard }) {
       }
     });
   };
+
   const handleChangeTextField = (fieldName) => (event) => changeTask({ ...task, [fieldName]: event.target.value });
-  const styles = useStyles();
+  const handleChangeSelect = (fieldName) => (user) => changeTask({ ...task, [fieldName]: user });
 
   return (
     <Modal className={styles.modal} open onClose={onClose}>
@@ -51,7 +56,7 @@ function AddPopup({ onClose, onCreateCard }) {
               error={has('name', errors)}
               helperText={errors.name}
               onChange={handleChangeTextField('name')}
-              value={task.name}
+              value={TaskPresenter.name(task)}
               label="Name"
               required
               margin="dense"
@@ -60,10 +65,19 @@ function AddPopup({ onClose, onCreateCard }) {
               error={has('description', errors)}
               helperText={errors.description}
               onChange={handleChangeTextField('description')}
-              value={task.description}
+              value={TaskPresenter.description(task)}
               label="Description"
               required
               margin="dense"
+            />
+            <UserSelect
+              label="Assignee"
+              value={TaskPresenter.assignee(task)}
+              onChange={handleChangeSelect('assignee')}
+              isDisabled={false}
+              isRequired
+              error={has('assignee', errors)}
+              helperText={errors.assignee}
             />
           </div>
         </CardContent>
