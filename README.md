@@ -4,11 +4,11 @@
 
 ---
 
-### Demonstration of the project on render.com
+### Demonstration of the project on [render.com](https://render.com/):
 
-[Task Manager](https://task-manager-3kr8.onrender.com)
+Link to the project - [Task Manager](https://task-manager-3kr8.onrender.com)
 
-###### Administrator Access
+##### Administrator access:
 
-Email: admin@localhost.gen
+Email: admin@localhost.gen  
 Password: admin
