@@ -29,6 +29,7 @@ gem 'responders'
 gem 'active_model_serializers'
 gem 'webpacker-react'
 gem 'js-routes'
+gem 'newrelic_rpm'
 
 # Use Active Storage variant
 # gem 'image_processing', '~> 1.2'
