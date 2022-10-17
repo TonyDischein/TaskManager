@@ -42,6 +42,8 @@ group :development, :test do
 
   gem 'factory_bot_rails'
   gem 'rubocop'
+  gem 'simplecov', require: false
+  gem 'simplecov-lcov', require: false
 end
 
 group :development do
