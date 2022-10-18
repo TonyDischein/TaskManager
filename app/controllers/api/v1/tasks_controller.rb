@@ -11,6 +11,7 @@ class Api::V1::TasksController < Api::V1::ApplicationController
 
   def show
     task = Task.find(params[:id])
+    raise 'I am production exeption' if task.name == 'test'
 
     respond_with(task, serializer: TaskSerializer)
   end
