@@ -1,1 +1,11 @@
-| Task #{@task.id} was updated
+td style="padding: 20px;"
+    p style="paddin-buttom: 10px" Dear user!
+
+    span style="font-size: 14px; font-family:Arial, sans-serif;" Task #{@task.id} was updated
+
+    p style="font-size: 14px; font-family:Arial, sans-serif; line-height: 1.5"
+       | Title: #{@task.name}
+       br
+       | Description: #{@task.description}
+
+    = link_to "Link to Task Board", board_url
