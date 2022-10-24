@@ -11,7 +11,7 @@ class Web::PasswordResetsController < Web::ApplicationController
     if @password_reset_new.valid?
       @password_reset_new.user.set_password_reset_token
 
-      PasswordResetMailer.with({ user: @password_reset_new.user }).reset_password.deliver_now
+      PasswordResetMailer.with({ user: @password_reset_new.user }).reset_password.deliver_later
     end
 
     redirect_to(new_session_path, flash: { success: t('password_reset.create.success') })
