@@ -1,4 +1,5 @@
 require 'simplecov'
+require 'sidekiq/testing'
 
 if ENV['COVERAGE']
   SimpleCov.start do
