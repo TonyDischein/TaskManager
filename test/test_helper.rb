@@ -1,6 +1,8 @@
 require 'simplecov'
 require 'sidekiq/testing'
 
+Sidekiq::Testing.inline!
+
 if ENV['COVERAGE']
   SimpleCov.start do
     require 'simplecov-lcov'

@@ -9,7 +9,7 @@ class UserMailerTest < ActionMailer::TestCase
     email = UserMailer.with(params).task_created
 
     assert_emails 1 do
-      email.deliver_later
+      email.deliver_now
     end
 
     assert_equal [ENV['MAILER_USERNAME']], email.from
@@ -32,7 +32,7 @@ class UserMailerTest < ActionMailer::TestCase
     email = UserMailer.with(params).task_updated
 
     assert_emails 1 do
-      email.deliver_later
+      email.deliver_now
     end
 
     assert_equal [ENV['MAILER_USERNAME']], email.from
@@ -50,7 +50,7 @@ class UserMailerTest < ActionMailer::TestCase
     email = UserMailer.with(params).task_deleted
 
     assert_emails 1 do
-      email.deliver_later
+      email.deliver_now
     end
 
     assert_equal [ENV['MAILER_USERNAME']], email.from
