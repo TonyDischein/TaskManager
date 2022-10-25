@@ -209,6 +209,7 @@ GEM
     rb-inotify (0.10.1)
       ffi (~> 1.0)
     redis (4.8.0)
+    redis-prescription (1.0.0)
     regexp_parser (2.5.0)
     responders (3.0.1)
       actionpack (>= 5.0)
@@ -249,6 +250,12 @@ GEM
       connection_pool (>= 2.2.5)
       rack (~> 2.0)
       redis (>= 4.5.0, < 5)
+    sidekiq-failures (1.0.4)
+      sidekiq (>= 4.0.0)
+    sidekiq-throttled (0.17.0)
+      concurrent-ruby
+      redis-prescription
+      sidekiq (>= 6.4)
     simple_form (5.1.0)
       actionpack (>= 5.2)
       activemodel (>= 5.2)
@@ -340,6 +347,8 @@ DEPENDENCIES
   sass-rails (>= 6)
   selenium-webdriver
   sidekiq
+  sidekiq-failures
+  sidekiq-throttled
   simple_form
   simplecov
   simplecov-lcov
