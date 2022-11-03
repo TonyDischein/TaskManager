@@ -14,7 +14,9 @@ class UserMailer < ApplicationMailer
   end
 
   def task_deleted
-    mail(to: @user.email, subject: "Task #{@task.id} Deleted")
+    @task_id = @task
+
+    mail(to: @user.email, subject: "Task #{@task_id} Deleted")
   end
 
   private
