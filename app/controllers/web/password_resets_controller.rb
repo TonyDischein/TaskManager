@@ -1,25 +1,30 @@
 class Web::PasswordResetsController < Web::ApplicationController
   before_action :set_user, only: [:edit, :update]
 
-  def new; end
+  def new
+    @password_reset_new = PasswordResetNewForm.new
+  end
 
   def create
-    user = User.find_by(email: params['password_reset'][:email])
+    @password_reset_new = PasswordResetNewForm.new(password_reset_new_params)
 
-    if user.present?
-      user.set_password_reset_token
+    if @password_reset_new.valid?
+      @password_reset_new.user.set_password_reset_token
 
-      PasswordResetMailer.with({ user: user }).reset_password.deliver_now
+      PasswordResetMailer.with({ user: @password_reset_new.user }).reset_password.deliver_now
     end
 
     redirect_to(new_session_path, flash: { success: t('password_reset.create.success') })
   end
 
-  def edit; end
+  def edit
+    @password_reset_edit = PasswordResetEditForm.new
+  end
 
   def update
-    if @user.update(password_params)
+    @password_reset_edit = PasswordResetEditForm.new(password_reset_edit_params)
 
+    if @password_reset_edit.update
       redirect_to(new_session_path, flash: { success: t('password_reset.update.success') })
     else
       render(:edit)
@@ -28,8 +33,12 @@ class Web::PasswordResetsController < Web::ApplicationController
 
   private
 
-  def password_params
-    params.require(:user).permit(:password, :password_confirmation)
+  def password_reset_new_params
+    params.require(:password_reset_new_form).permit(:email)
+  end
+
+  def password_reset_edit_params
+    params.require(:password_reset_edit_form).permit(:password, :password_confirmation, :password_reset_token)
   end
 
   def set_user

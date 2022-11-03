@@ -1,31 +1,26 @@
 class UserMailer < ApplicationMailer
-  def task_created
-    user, @task = get_message_data
+  before_action do
+    @user = params[:user]
+    @task = params[:task]
+  end
+  before_action :set_recipients_list, only: [:task_updated]
 
-    mail(to: user.email, subject: 'New Task Created')
+  def task_created
+    mail(to: @user.email, subject: 'New Task Created')
   end
 
   def task_updated
-    user, @task = get_message_data
-    users = get_recipients_list(user)
-
-    mail(to: users, subject: "Task #{@task.id} Updated")
+    mail(to: @users, subject: "Task #{@task.id} Updated")
   end
 
   def task_deleted
-    user, @task = get_message_data
-
-    mail(to: user.email, subject: "Task #{@task.id} Deleted")
+    mail(to: @user.email, subject: "Task #{@task.id} Deleted")
   end
 
   private
 
-  def get_message_data
-    [params[:user], params[:task]]
-  end
-
-  def get_recipients_list(user)
-    users = User.where(id: [@task.author_id, @task.assignee_id]).pluck(:email)
-    users | [user.email]
+  def set_recipients_list
+    @users = User.where(id: [@task.author_id, @task.assignee_id]).pluck(:email)
+    @users | [@user.email]
   end
 end

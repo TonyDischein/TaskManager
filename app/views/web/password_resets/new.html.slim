@@ -1,5 +1,5 @@
 h4 Reset passord
-= simple_form_for :password_reset, url: password_reset_path do |f|
+= simple_form_for @password_reset_new, url: password_reset_path do |f|
   p
     = f.input :email
   p
