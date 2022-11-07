@@ -15,8 +15,6 @@ class PasswordResetNewForm
   private
 
   def user_valid?
-    if user.blank?
-      errors.add(:email, 'User not found')
-    end
+    errors.add(:email, I18n.t('password_reset.create.fail')) if user.blank?
   end
 end

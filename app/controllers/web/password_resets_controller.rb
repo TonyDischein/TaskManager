@@ -23,12 +23,11 @@ class Web::PasswordResetsController < Web::ApplicationController
 
   def update
     @password_reset_edit = PasswordResetEditForm.new(password_reset_edit_params)
+    return render(:edit) if @password_reset_edit.invalid?
 
-    if @password_reset_edit.update
-      redirect_to(new_session_path, flash: { success: t('password_reset.update.success') })
-    else
-      render(:edit)
-    end
+    @user.update(password: @password_reset_edit.password)
+
+    redirect_to(new_session_path, flash: { success: t('password_reset.update.success') })
   end
 
   private

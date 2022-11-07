@@ -3,7 +3,7 @@ class SendResetPasswordJob < ApplicationJob
   sidekiq_throttle_as :mailer
 
   def perform(user_id)
-    user = User.find_by(id: user_id)
+    user = User.find(user_id)
     return if user.blank?
 
     PasswordResetMailer.with(user: user).reset_password.deliver_now

@@ -33,6 +33,7 @@ en:
   password_reset:
     create:
       success: 'If an account with that email was found, we have sent a link to reset you password.'
+      fail: 'User not found'
     update:
       success: 'You password was reset succesfully. Please sign in.'
       fail: 'You token has expired. Please try again'
