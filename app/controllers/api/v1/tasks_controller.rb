@@ -1,4 +1,6 @@
 class Api::V1::TasksController < Api::V1::ApplicationController
+  before_action :set_task, only: [:show, :update, :destroy]
+
   def index
     tasks = Task.includes([:author, :assignee]).order(id: :desc).
       ransack(ransack_params).
@@ -10,44 +12,36 @@ class Api::V1::TasksController < Api::V1::ApplicationController
   end
 
   def show
-    task = Task.find(params[:id])
-
-    respond_with(task, serializer: TaskSerializer)
+    respond_with(@task, serializer: TaskSerializer)
   end
 
   def create
     task = current_user.my_tasks.new(task_params)
 
-    if task.save
-      UserMailer.with({ user: current_user, task: task }).task_created.deliver_now
-    end
+    SendTaskCreateNotificationJob.perform_async(task.id) if task.save
 
     respond_with(task, serializer: TaskSerializer)
   end
 
   def update
-    task = Task.find(params[:id])
+    SendTaskUpdateNotificationJob.perform_async(@task.id) if @task.update(task_params)
 
-    if task.update(task_params)
-      UserMailer.with({ user: current_user, task: task }).task_updated.deliver_now
-    end
-
-    respond_with(task, serializer: TaskSerializer)
+    respond_with(@task, serializer: TaskSerializer)
   end
 
   def destroy
-    task = Task.find(params[:id])
+    SendTaskDeleteNotificationJob.perform_async(@task.id, @task.author_id) if @task.destroy
 
-    if task.destroy
-      UserMailer.with({ user: current_user, task: task }).task_deleted.deliver_now
-    end
-
-    respond_with(task)
+    respond_with(@task)
   end
 
   private
 
   def task_params
     params.require(:task).permit(:name, :description, :author_id, :assignee_id, :state_event, :expired_at)
+  end
+
+  def set_task
+    @task = Task.find(params[:id])
   end
 end

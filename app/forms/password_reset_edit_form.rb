@@ -15,17 +15,9 @@ class PasswordResetEditForm
     User.find_by(password_reset_token: password_reset_token)
   end
 
-  def update
-    return false if invalid?
-
-    user.update(password: password)
-  end
-
   private
 
   def user_valid?
-    if user.blank?
-      errors.add(:base, 'User not found')
-    end
+    errors.add(:base, I18n.t('password_reset.update.fail')) if user.blank?
   end
 end

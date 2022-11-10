@@ -13,7 +13,7 @@ class PasswordResetMailerTest < ActionMailer::TestCase
     email = PasswordResetMailer.with(params).reset_password
 
     assert_emails 1 do
-      email.deliver_now
+      email.deliver_later
     end
 
     assert_equal [ENV['MAILER_USERNAME']], email.from

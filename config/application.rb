@@ -12,5 +12,7 @@ module TaskManager
     config.load_defaults 6.1
 
     config.assets.paths << Rails.root.join('node_modules')
+
+    config.active_job.queue_adapter = :sidekiq
   end
 end
