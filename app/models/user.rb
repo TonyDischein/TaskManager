@@ -1,4 +1,5 @@
 class User < ApplicationRecord
+  include Recoverable
   has_secure_password
 
   has_many :my_tasks, class_name: 'Task', foreign_key: :author_id

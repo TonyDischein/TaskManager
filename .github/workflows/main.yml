@@ -18,6 +18,8 @@ jobs:
         env:
           COVERAGE: true
           RAILS_ENV: test
+          MAILER_HOST: ${{ secrets.MAILER_HOST }}
+          MAILER_USERNAME: ${{ secrets.MAILER_USERNAME }}
         run: docker-compose --file docker-compose.ci.yml run ci
       - name: Coveralls
         uses: coverallsapp/github-action@master

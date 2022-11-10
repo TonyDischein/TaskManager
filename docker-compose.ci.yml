@@ -10,6 +10,8 @@ services:
     environment:
       - COVERAGE
       - RAILS_ENV
+      - MAILER_HOST
+      - MAILER_USERNAME
       - DATABASE_HOST=db
       - DATABASE_USERNAME=postgres
     volumes:

@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   scope module: :web do
     resource :board, only: :show
     resource :session, only: [:new, :create, :destroy]
+    resource :password_reset, only: [:new, :create, :edit, :update]
     resources :developers, only: [:new, :create]
   end
 
@@ -17,4 +18,6 @@ Rails.application.routes.draw do
       resources :users, only: [:index, :show]
     end
   end
+
+  mount LetterOpenerWeb::Engine, at: "/letter_opener" if Rails.env.development?
 end
