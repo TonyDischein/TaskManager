@@ -2,7 +2,7 @@ class Api::V1::TasksController < Api::V1::ApplicationController
   before_action :set_task, only: [:show, :update, :destroy]
 
   def index
-    tasks = Task.includes([:author, :assignee]).order(id: :desc).
+    tasks = Task.includes([:author, :assignee]).with_attached_image.order(id: :desc).
       ransack(ransack_params).
       result.
       page(page).
@@ -47,7 +47,7 @@ class Api::V1::TasksController < Api::V1::ApplicationController
 
     image = task_attach_image_form.processed_image
 
-    task.image.attach(image)
+    task.image.attach(io: File.open(image.path), filename: File.basename(image.path), content_type: image.content_type)
 
     respond_with(task, serializer: TaskSerializer)
   end
