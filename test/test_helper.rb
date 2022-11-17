@@ -35,4 +35,12 @@ class ActiveSupport::TestCase
 
   # Add more helper methods to be used by all tests here...
   include AuthHelper
+
+  def after_teardown
+    def remove_uploaded_files
+      FileUtils.rm_rf(ActiveStorage::Blob.service.root)
+    end
+
+    remove_uploaded_files
+  end
 end
