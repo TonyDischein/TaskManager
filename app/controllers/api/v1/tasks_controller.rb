@@ -18,19 +18,19 @@ class Api::V1::TasksController < Api::V1::ApplicationController
   def create
     task = current_user.my_tasks.new(task_params)
 
-    SendTaskCreateNotificationJob.perform_async(task.id) if task.save
+    UserMailer.with({ user: current_user, task: task }).task_created.deliver_now if task.save
 
     respond_with(task, serializer: TaskSerializer)
   end
 
   def update
-    SendTaskUpdateNotificationJob.perform_async(@task.id) if @task.update(task_params)
+    UserMailer.with({ user: current_user, task: @task }).task_updated.deliver_now if @task.update(task_params)
 
     respond_with(@task, serializer: TaskSerializer)
   end
 
   def destroy
-    SendTaskDeleteNotificationJob.perform_async(@task.id, @task.author_id) if @task.destroy
+    UserMailer.with({ user: current_user, task: @task }).task_deleted.deliver_now if @task.destroy
 
     respond_with(@task)
   end
