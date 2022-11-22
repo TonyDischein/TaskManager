@@ -20,12 +20,10 @@ end
 ENV['RAILS_ENV'] ||= 'test'
 require_relative '../config/environment'
 require_relative './bullet_helper'
-require_relative './storage_helper'
 require 'rails/test_help'
 
 class ActiveSupport::TestCase
   include BulletHelper
-  include StorageHelper
   include FactoryBot::Syntax::Methods
   include ActionMailer::TestHelper
 
