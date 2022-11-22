@@ -19,7 +19,18 @@ const MODES = {
 };
 
 function TaskBoard() {
-  const { board, loadBoard, loadColumnMore, dragEndCard, createTask, updateTask, loadTask, destroyTask } = useTasks();
+  const {
+    board,
+    loadBoard,
+    loadColumnMore,
+    dragEndCard,
+    createTask,
+    updateTask,
+    loadTask,
+    destroyTask,
+    attachTaskImage,
+    detachTaskImage,
+  } = useTasks();
   const [mode, setMode] = useState(MODES.NONE);
   const [openedTaskId, setOpenedTaskId] = useState(null);
   const styles = useStyles();
@@ -60,6 +71,9 @@ function TaskBoard() {
       handleClose();
     });
 
+  const handleTaskImageAttach = (id, image) => attachTaskImage(id, image).then(() => {});
+  const handleTaskImageDetach = (task) => detachTaskImage(task).then(() => {});
+
   const handleTaskLoad = (id) => loadTask(id);
 
   const handleTaskDestroy = (task) =>
@@ -88,6 +102,8 @@ function TaskBoard() {
           onLoadCard={handleTaskLoad}
           onCardDestroy={handleTaskDestroy}
           onCardUpdate={handleTaskUpdate}
+          onAttachImage={handleTaskImageAttach}
+          onDetachImage={handleTaskImageDetach}
           onClose={handleClose}
           cardId={openedTaskId}
         />

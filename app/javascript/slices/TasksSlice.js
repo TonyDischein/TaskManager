@@ -110,6 +110,16 @@ export const useTasksActions = () => {
     });
   };
 
+  const attachTaskImage = (id, image) =>
+    TasksRepository.attachImage(id, image).then(({ data: { task } }) => {
+      loadColumn(TaskPresenter.state(task));
+    });
+
+  const detachTaskImage = (task) =>
+    TasksRepository.detachImage(task.id).then(() => {
+      loadColumn(TaskPresenter.state(task));
+    });
+
   const loadTask = (id) => TasksRepository.show(id).then(({ data: { task } }) => task);
 
   const destroyTask = (task) =>
@@ -125,5 +135,7 @@ export const useTasksActions = () => {
     updateTask,
     loadTask,
     destroyTask,
+    attachTaskImage,
+    detachTaskImage,
   };
 };
