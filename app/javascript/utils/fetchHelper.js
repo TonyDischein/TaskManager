@@ -1,7 +1,8 @@
 import axios from 'axios';
 import qs from 'qs';
 
-import { camelize, decamelize } from './keysConverter';
+import { camelize, decamelize, decamelizeFormData } from './keysConverter';
+import { objectToFormData } from './objectToFormData';
 
 function authenticityToken() {
   const token = document.querySelector('meta[name="csrf-token"]');
@@ -58,6 +59,25 @@ export default {
   },
 
   delete(url, json) {
+    const body = decamelize(json);
+
+    return axios.delete(url, body).then(camelize);
+  },
+
+  putFormData(url, json) {
+    const body = decamelizeFormData(json);
+    const formData = objectToFormData(body.image);
+
+    return axios
+      .put(url, formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+      })
+      .then(camelize);
+  },
+
+  deleteFormData(url, json) {
     const body = decamelize(json);
 
     return axios.delete(url, body).then(camelize);
