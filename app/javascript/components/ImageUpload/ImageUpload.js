@@ -15,6 +15,7 @@ function ImageUpload({ onUpload }) {
     unit: '%',
     width: 90,
   };
+  const DEFAULT_CROP_ASPECT = 16 / 9;
 
   const [fileAsBase64, changeFileAsBase64] = useState(null);
   const [cropParams, changeCropParams] = useState(DEFAULT_CROP_PARAMS);
@@ -33,7 +34,7 @@ function ImageUpload({ onUpload }) {
         {
           ...DEFAULT_CROP_PARAMS,
         },
-        16 / 9,
+        DEFAULT_CROP_ASPECT,
         width,
         height,
       ),
@@ -67,10 +68,10 @@ function ImageUpload({ onUpload }) {
     changeFileAsBase64(newImage.target.result);
   };
 
-  const handleLoadFile = (e) => {
-    e.preventDefault();
+  const handleLoadFile = (event) => {
+    event.preventDefault();
 
-    const [acceptedFile] = e.target.files;
+    const [acceptedFile] = event.target.files;
 
     const fileReader = new FileReader();
 

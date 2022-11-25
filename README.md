@@ -7,7 +7,7 @@
 
 ### Demonstration of the project on [render.com](https://render.com/):
 
-Link to the project - [Task Manager](https://task-manager-3kr8.onrender.com)
+Link to the project - [Task Manager](https://task-manager-fwtb.onrender.com)
 
 ##### Administrator access:
 

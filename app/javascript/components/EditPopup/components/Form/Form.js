@@ -16,15 +16,23 @@ function Form({ errors, onChange, task, onAttachImage, onDetachImage }) {
   const handleChangeSelect = (fieldName) => (user) => onChange({ ...task, [fieldName]: user });
 
   const handleCardAttach = (image) => {
-    onAttachImage(task.id, image).catch((error) => {
-      alert(`Destrucion Failed! Error: ${error.message}`);
-    });
+    onAttachImage(task.id, image)
+      .then((data) => {
+        onChange({ ...task, imageUrl: data.imageUrl });
+      })
+      .catch((error) => {
+        alert(`Destrucion Failed! Error: ${error.message}`);
+      });
   };
 
   const handleCardDetach = () => {
-    onDetachImage(task).catch((error) => {
-      alert(`Destrucion Failed! Error: ${error.message}`);
-    });
+    onDetachImage(task)
+      .then(() => {
+        onChange({ ...task, imageUrl: null });
+      })
+      .catch((error) => {
+        alert(`Destrucion Failed! Error: ${error.message}`);
+      });
   };
 
   return (

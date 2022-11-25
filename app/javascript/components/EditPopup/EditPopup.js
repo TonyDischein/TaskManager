@@ -25,7 +25,7 @@ function EditPopup({ cardId, onLoadCard, onCardUpdate, onCardDestroy, onClose, o
 
   useEffect(() => {
     onLoadCard(cardId).then(setTask);
-  }, [onAttachImage, onDetachImage]);
+  }, []);
 
   const handleCardUpdate = () => {
     setSaving(true);

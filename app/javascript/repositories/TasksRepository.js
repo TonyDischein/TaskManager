@@ -35,7 +35,7 @@ export default {
   attachImage(id, image = {}) {
     const path = routes.attachImageApiV1TaskPath(id);
 
-    return FetchHelper.putFormData(path, { image });
+    return FetchHelper.putFormData(path, image);
   },
 
   detachImage(id) {

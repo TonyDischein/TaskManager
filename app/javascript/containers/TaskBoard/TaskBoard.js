@@ -71,8 +71,8 @@ function TaskBoard() {
       handleClose();
     });
 
-  const handleTaskImageAttach = (id, image) => attachTaskImage(id, image).then(() => {});
-  const handleTaskImageDetach = (task) => detachTaskImage(task).then(() => {});
+  const handleTaskImageAttach = (id, image) => attachTaskImage(id, image).then((task) => task);
+  const handleTaskImageDetach = (task) => detachTaskImage(task);
 
   const handleTaskLoad = (id) => loadTask(id);
 

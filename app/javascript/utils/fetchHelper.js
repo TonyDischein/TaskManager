@@ -1,8 +1,9 @@
 import axios from 'axios';
 import qs from 'qs';
 
-import { camelize, decamelize, decamelizeFormData } from './keysConverter';
+import { camelize, decamelize } from './keysConverter';
 import { objectToFormData } from './objectToFormData';
+import attachImage from './attachImage';
 
 function authenticityToken() {
   const token = document.querySelector('meta[name="csrf-token"]');
@@ -65,8 +66,9 @@ export default {
   },
 
   putFormData(url, json) {
-    const body = decamelizeFormData(json);
-    const formData = objectToFormData(body.image);
+    let body = decamelize(json);
+    body = attachImage(body, json);
+    const formData = objectToFormData(body);
 
     return axios
       .put(url, formData, {
