@@ -1,6 +1,6 @@
-class SendTaskDeleteNotificationJob < ApplicationJob
-  sidekiq_options queue: :mailers
-  sidekiq_throttle_as :mailer
+class SendTaskDeleteNotificationJob < ActiveJob::Base
+  # sidekiq_options queue: :mailers
+  # sidekiq_throttle_as :mailer
 
   def perform(task_id, author_id)
     user = User.find_by(id: author_id)
