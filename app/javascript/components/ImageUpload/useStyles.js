@@ -1,23 +1,23 @@
 import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles(() => ({
-  root: {
-    display: 'flex',
-    flexDirection: 'column',
+  crop: {
+    maxHeight: 300,
+    maxWidth: 300,
   },
-  previewContainer: {
+  imageBlockWrapper: {
     display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
     flexDirection: 'column',
-    alignContent: 'center',
-    padding: 10,
+    padding: 8,
   },
-  preview: {
-    maxWidth: '100%',
+  reactCrop: {
+    maxHeight: 'inherit',
   },
   button: {
-    display: 'flex',
     alignSelf: 'start',
-    marginTop: 8,
+    padding: 8,
   },
 }));
 

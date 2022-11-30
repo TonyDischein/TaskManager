@@ -4,7 +4,17 @@ import { useTasksActions } from 'slices/TasksSlice';
 const useTasks = () => {
   const board = useSelector((state) => state.TasksSlice.board);
 
-  const { loadBoard, loadColumnMore, dragEndCard, createTask, updateTask, loadTask, destroyTask } = useTasksActions();
+  const {
+    loadBoard,
+    loadColumnMore,
+    dragEndCard,
+    createTask,
+    updateTask,
+    loadTask,
+    destroyTask,
+    attachTaskImage,
+    detachTaskImage,
+  } = useTasksActions();
 
   return {
     board,
@@ -15,6 +25,8 @@ const useTasks = () => {
     updateTask,
     loadTask,
     destroyTask,
+    attachTaskImage,
+    detachTaskImage,
   };
 };
 

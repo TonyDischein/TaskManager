@@ -105,10 +105,12 @@ export const useTasksActions = () => {
   const updateTask = (id) => {
     const attributes = TaskForm.attributesToSubmit(id);
 
-    return TasksRepository.update(id, attributes).then(({ data: { task } }) => {
-      loadColumn(TaskPresenter.state(task));
-    });
+    return TasksRepository.update(id, attributes).then(({ data: { task } }) => task);
   };
+
+  const attachTaskImage = (id, image) => TasksRepository.attachImage(id, image).then(({ data: { task } }) => task);
+
+  const detachTaskImage = (task) => TasksRepository.detachImage(task.id);
 
   const loadTask = (id) => TasksRepository.show(id).then(({ data: { task } }) => task);
 
@@ -125,5 +127,7 @@ export const useTasksActions = () => {
     updateTask,
     loadTask,
     destroyTask,
+    attachTaskImage,
+    detachTaskImage,
   };
 };

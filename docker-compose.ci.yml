@@ -12,6 +12,7 @@ services:
       - RAILS_ENV
       - MAILER_HOST
       - MAILER_USERNAME
+      - ACTIVE_STORAGE_HOST
       - DATABASE_HOST=db
       - DATABASE_USERNAME=postgres
     volumes:
